@@ -26,14 +26,9 @@ class VoiceInterviewApp {
 
     initializeElements() {
         this.elements = {
-            signInBtn: document.getElementById('signInBtn'),
-            signOutBtn: document.getElementById('signOutBtn'),
             userInfo: document.getElementById('userInfo'),
             userName: document.getElementById('userName'),
             mainContent: document.getElementById('mainContent'),
-            signInModal: document.getElementById('signInModal'),
-            signInForm: document.getElementById('signInForm'),
-            cancelSignIn: document.getElementById('cancelSignIn'),
             apiKeyBtn: document.getElementById('apiKeyBtn'),
             apiKeyModal: document.getElementById('apiKeyModal'),
             apiKeyForm: document.getElementById('apiKeyForm'),
@@ -58,20 +53,6 @@ class VoiceInterviewApp {
 
     initializeEventListeners() {
         console.log('Initializing event listeners...');
-        console.log('Sign in button:', this.elements.signInBtn);
-        
-        if (this.elements.signInBtn) {
-            this.elements.signInBtn.addEventListener('click', () => {
-                console.log('Sign in button clicked');
-                this.showSignInModal();
-            });
-        } else {
-            console.error('Sign in button not found!');
-        }
-        
-        this.elements.signOutBtn.addEventListener('click', () => this.signOut());
-        this.elements.cancelSignIn.addEventListener('click', () => this.hideSignInModal());
-        this.elements.signInForm.addEventListener('submit', (e) => this.handleSignIn(e));
         this.elements.apiKeyBtn.addEventListener('click', () => this.showApiKeyModal());
         this.elements.cancelApiKey.addEventListener('click', () => this.hideApiKeyModal());
         this.elements.clearApiKey.addEventListener('click', () => this.clearApiKey());
@@ -235,11 +216,14 @@ class VoiceInterviewApp {
     }
 
     checkAuthState() {
-        const savedUser = localStorage.getItem('currentUser');
-        if (savedUser) {
-            this.currentUser = JSON.parse(savedUser);
-            this.showMainContent();
-        }
+        // Auto-login with default user - no authentication required
+        this.currentUser = {
+            id: 'default-user',
+            email: 'user@example.com',
+            name: 'User'
+        };
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        this.showMainContent();
     }
 
     showSignInModal() {
@@ -368,7 +352,6 @@ class VoiceInterviewApp {
     showMainContent() {
         this.elements.userName.textContent = this.currentUser.name;
         this.elements.userInfo.classList.remove('hidden');
-        this.elements.signInBtn.classList.add('hidden');
         this.elements.mainContent.classList.remove('hidden');
         this.loadHistory();
         this.loadSharedSessions();
