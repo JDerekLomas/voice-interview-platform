@@ -57,7 +57,18 @@ class VoiceInterviewApp {
     }
 
     initializeEventListeners() {
-        this.elements.signInBtn.addEventListener('click', () => this.showSignInModal());
+        console.log('Initializing event listeners...');
+        console.log('Sign in button:', this.elements.signInBtn);
+        
+        if (this.elements.signInBtn) {
+            this.elements.signInBtn.addEventListener('click', () => {
+                console.log('Sign in button clicked');
+                this.showSignInModal();
+            });
+        } else {
+            console.error('Sign in button not found!');
+        }
+        
         this.elements.signOutBtn.addEventListener('click', () => this.signOut());
         this.elements.cancelSignIn.addEventListener('click', () => this.hideSignInModal());
         this.elements.signInForm.addEventListener('submit', (e) => this.handleSignIn(e));
@@ -232,7 +243,14 @@ class VoiceInterviewApp {
     }
 
     showSignInModal() {
-        this.elements.signInModal.classList.remove('hidden');
+        console.log('showSignInModal called');
+        console.log('Sign in modal element:', this.elements.signInModal);
+        if (this.elements.signInModal) {
+            this.elements.signInModal.classList.remove('hidden');
+            console.log('Modal should now be visible');
+        } else {
+            console.error('Sign in modal element not found!');
+        }
     }
 
     hideSignInModal() {
@@ -1015,4 +1033,11 @@ function initializeSharedSession(config) {
 }
 
 // Initialize the app
-const app = new VoiceInterviewApp();
+console.log('Starting Voice Interview App initialization...');
+try {
+    const app = new VoiceInterviewApp();
+    console.log('Voice Interview App initialized successfully');
+    window.app = app; // Make app globally accessible for debugging
+} catch (error) {
+    console.error('Failed to initialize Voice Interview App:', error);
+}
