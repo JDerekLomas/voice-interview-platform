@@ -1041,3 +1041,6 @@ try {
 } catch (error) {
     console.error('Failed to initialize Voice Interview App:', error);
 }
+
+// Export for module system
+export default VoiceInterviewApp;

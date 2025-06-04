@@ -10,7 +10,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "serve": "npx serve .",
-    "deploy": "gh-pages -d ."
+    "deploy": "gh-pages -d .",
+    "vercel-build": "npm run build"
   },
   "keywords": [
     "voice-interview",

@@ -46,3 +46,6 @@ class Config {
 
 // Create global config instance
 window.appConfig = new Config();
+
+// Export for module system
+export default Config;

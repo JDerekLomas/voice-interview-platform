@@ -145,3 +145,6 @@ class ClaudeAPI {
 
 // Create global Claude API instance
 window.claudeAPI = new ClaudeAPI(window.appConfig);
+
+// Export for module system
+export default ClaudeAPI;
