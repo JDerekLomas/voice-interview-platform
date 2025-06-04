@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Pictura's Image Server</title>
+</head>
+<body>
+  <h1>An error occurred</h1>
+  <h2>Page not found</h2>
+
+  
+  <h3>Exception information:</h3>
+  <p>
+      <b>Message:</b> Invalid controller specified (rit)  </p>
+
+  <h3>Stack trace:</h3>
+  <pre>#0 /www2/pic/images.memorix.nl/vendor/picturae/zendframework1/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch()
+#1 /www2/pic/images.memorix.nl/vendor/picturae/zendframework1/Zend/Application/Bootstrap/Bootstrap.php(105): Zend_Controller_Front->dispatch()
+#2 /www2/pic/images.memorix.nl/vendor/picturae/zendframework1/Zend/Application.php(384): Zend_Application_Bootstrap_Bootstrap->run()
+#3 /www2/pic/images.memorix.nl/public/index.php(20): Zend_Application->run()
+#4 {main}  </pre>
+
+  <h3>Request Parameters:</h3>
+  <pre>array (
+  'controller' => 'rit',
+  'action' => 'original',
+  'module' => 'default',
+)  </pre>
+  
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Interview Testing Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Voice Interview Testing Platform</h1>
+            <div class="auth-section" id="authSection">
+                <button id="signInBtn" class="btn btn-primary">Sign In</button>
+                <div id="userInfo" class="user-info hidden">
+                    <span id="userName"></span>
+                    <button id="apiKeyBtn" class="btn btn-secondary">API Key</button>
+                    <button id="signOutBtn" class="btn btn-secondary">Sign Out</button>
+                </div>
+            </div>
+        </header>
+
+        <main id="mainContent" class="hidden">
+            <div class="form-section">
+                <h2>Configure Interview</h2>
+                <div class="form-group">
+                    <label for="openingLine">Opening Line:</label>
+                    <textarea id="openingLine" placeholder="Enter the opening line for the interview..." rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="systemPrompt">System Prompt:</label>
+                    <textarea id="systemPrompt" placeholder="Enter the system prompt for the AI..." rows="5"></textarea>
+                </div>
+                <button id="startSessionBtn" class="btn btn-primary btn-large">Start Session</button>
+                <button id="createShareLinkBtn" class="btn btn-secondary btn-large">Create Share Link</button>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="configure">Configure</button>
+                <button class="tab-btn" data-tab="history">History</button>
+                <button class="tab-btn" data-tab="shared">Shared</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="configureTab" class="tab-panel active">
+                    <!-- Configure section is above -->
+                </div>
+
+                <div id="historyTab" class="tab-panel">
+                    <h2>Session History</h2>
+                    <div id="historyList" class="history-list">
+                        <!-- History items will be populated here -->
+                    </div>
+                </div>
+
+                <div id="sharedTab" class="tab-panel">
+                    <h2>Shared Sessions</h2>
+                    <div id="sharedList" class="shared-list">
+                        <!-- Shared items will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="voiceSession" class="voice-session hidden">
+            <div class="session-header">
+                <h2>Voice Interview Session</h2>
+                <button id="endSessionBtn" class="btn btn-danger">End Session</button>
+            </div>
+            <div class="conversation" id="conversation">
+                <!-- Conversation will be populated here -->
+            </div>
+            <div class="voice-controls">
+                <button id="micBtn" class="mic-btn">
+                    <span class="mic-icon">🎤</span>
+                    <span class="mic-text">Click to Speak</span>
+                </button>
+                <div class="status" id="voiceStatus">Ready</div>
+            </div>
+        </div>
+
+        <div id="signInModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Sign In</h2>
+                <form id="signInForm">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Sign In</button>
+                        <button type="button" id="cancelSignIn" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="apiKeyModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Claude API Configuration</h2>
+                <div class="api-status" id="apiStatus">
+                    <div class="status-indicator" id="statusIndicator">⚪</div>
+                    <span id="statusText">Not configured</span>
+                </div>
+                <form id="apiKeyForm">
+                    <div class="form-group">
+                        <label for="apiKeyInput">API Key:</label>
+                        <input type="password" id="apiKeyInput" placeholder="sk-ant-..." required>
+                        <small>Get your API key from <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save & Test</button>
+                        <button type="button" id="cancelApiKey" class="btn btn-secondary">Cancel</button>
+                        <button type="button" id="clearApiKey" class="btn btn-danger">Clear Key</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="claude-api.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
