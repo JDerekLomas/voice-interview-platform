@@ -74,13 +74,17 @@ class VoiceInterviewApp {
             console.log('window.appConfig:', !!window.appConfig);
             console.log('window.claudeAPI:', !!window.claudeAPI);
             
-            // Initialize our own simple Claude API if the global ones aren't available
-            if (!window.claudeAPI || !window.appConfig) {
-                console.log('Creating simplified Claude API...');
-                this.claudeAPI = {
+            // Always use our backend API instead of the direct API
+            console.log('Creating backend Claude API...');
+            this.claudeAPI = {
                     generateResponse: async (userInput, systemPrompt) => {
                         try {
-                            const response = await fetch('http://localhost:3001/api/claude', {
+                            // Use backend server in development, Vercel functions in production
+                            const apiUrl = window.location.hostname === 'localhost' 
+                                ? 'http://localhost:3001/api/claude'
+                                : '/api/claude';
+                            
+                            const response = await fetch(apiUrl, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -105,16 +109,7 @@ class VoiceInterviewApp {
                         }
                     }
                 };
-                console.log('✅ Simplified Claude API created');
-            } else {
-                this.claudeAPI = window.claudeAPI;
-                localStorage.setItem('claude_api_key', this.apiKey);
-                window.appConfig.apiKey = this.apiKey;
-                if (this.claudeAPI.config) {
-                    this.claudeAPI.config.apiKey = this.apiKey;
-                }
-                console.log('✅ Using global Claude API');
-            }
+                console.log('✅ Backend Claude API created');
             
             this.updateApiStatus();
         } catch (error) {
